@@ -17,7 +17,7 @@ class sensors:
 
     # define analog pins
     ANALOG_TEMP     = 7
-    ANALOG_GRAVITY  = 1
+    ANALOG_GRAVITY  = 6
 
     def __init__(self):
         GPIO.setup(self.SPIMOSI, GPIO.OUT)
@@ -64,9 +64,11 @@ class sensors:
 
     def readTemp(self):
         temp = self.readadc(self.ANALOG_TEMP)
-        celsius = ((1000 * (temp * (3.3 / 1023))) - 500) / 10
-        fahrenheit = (celsius * 1.8) + 32
-        return (celsius, fahrenheit)
+        celsius = int(((1000 * (temp * (3.3 / 1023))) - 500) / 10)
+        return celsius 
+
+    def tempFahrenheit(self, temp):
+        return int((temp * 1.8) + 32)
 
     def readGravity(self):
         return self.readadc(self.ANALOG_GRAVITY)
