@@ -6,8 +6,8 @@ class Command(BaseCommand):
     s = sensors.sensors()
 
     def handle(self, *args, **options):
-        temp = self.s.readTemp()
-        print "The temp reading is " + str(temp)
+        (celsius, fahrenheit) = self.s.readTemp()
+        print "The temp reading is " + str(celsius) + " celsius, " + str(fahrenheit) + " fahrenheit."
         #gravity = sensors.readGravity() 
 
         

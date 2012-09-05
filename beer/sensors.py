@@ -66,8 +66,8 @@ class sensors:
     def readTemp(self):
 	temp = self.readadc(self.ANALOG_TEMP)
 	celsius = ((1000 * (temp * (3.3 / 1023))) - 500) / 10
-	fahrenheit = (celsius * (9 / 5)) + 32
-        return celsius
+	fahrenheit = (celsius * 1.8) + 32
+        return (celsius, fahrenheit)
 
     def readGravity(self):
         return self.readadc(self.ANALOG_GRAVITY)
