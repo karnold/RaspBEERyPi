@@ -30,7 +30,7 @@ class sensors:
             return -1
 
         GPIO.output(self.SPICS, True)
-        GPIO.output(self.SPICLK, True)
+        GPIO.output(self.SPICLK, False)
         GPIO.output(self.SPICS, False)
 
         commandout = adcnum
@@ -64,7 +64,10 @@ class sensors:
         return adcout
 
     def readTemp(self):
-        return self.readadc(self.ANALOG_TEMP)
+	temp = self.readadc(self.ANALOG_TEMP)
+	celsius = ((1000 * (temp * (3.3 / 1023))) - 500) / 10
+	fahrenheit = (celsius * (9 / 5)) + 32
+        return celsius
 
     def readGravity(self):
         return self.readadc(self.ANALOG_GRAVITY)
