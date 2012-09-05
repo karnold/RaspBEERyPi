@@ -59,7 +59,6 @@ class sensors:
         GPIO.output(self.SPICS, True)
 
         adcout >>= 1 # first bit is null so drop it
-        pprint.pprint(adcout)
 
         return adcout
 
