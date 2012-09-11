@@ -78,12 +78,18 @@ class sensors:
         minReading = 250.0 # again, a guess
         # Range - Used in calculating percent
         range = maxReading - minReading
-        # Sensor Length - Will need to be measured in CM from the bottom of the
-        # sensor to the calibrated pure water gravity reading.
-        length = 32 # just a place holder
-        # Percent Full - Must be calculated to find reading in CM
-        percentFull = (maxReading - curReading)/range
-        # Reading in CM - too bad the readings on a hydrometer don't directly
-        # translate to CM. The scale seems to be some sort of exponential function.
-        cmReading = length * percentFull 
-        return cmReading
+        # Sensor Length - We will need to find the length in Brix.
+        length = 50 # just a place holder
+        # Percent From top, or zero Brix.
+        perFromTop= (curReading - minReading)/range
+        # Reading in Brix.
+        brixReading = length * perFromTop
+        # Reading in SG.
+        sgReading = 1.000898 + 0.003859118*brixReading + 0.00001370735*brixReading**2 + 0.00000003742517*brixReading**3
+        # Get temp for temp correction
+        curCTemp = self.readTemp()
+        curFTemp = self.tempFahrenheit(curCTemp)
+        # Temperature corrected SG
+        correction = 1.313454 - 0.132674*curFTemp + 0.002057793*curFTemp**2 - 0.000002627634*curFTemp**3
+        sgCorrected = sgReading + (correction * 0.001)
+        return sgCorrected
