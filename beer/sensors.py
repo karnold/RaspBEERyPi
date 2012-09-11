@@ -71,4 +71,19 @@ class sensors:
         return int((temp * 1.8) + 32)
 
     def readGravity(self):
-        return self.readadc(self.ANALOG_GRAVITY)
+        curReading = self.readadc(self.ANALOG_GRAVITY)
+        # Maximum Reading - Will need to be a calibrated setting in the future
+        maxReding = 1000.0 # just taking a guess
+        # Minimum Reading - Will need to be a calibrated setting in the future
+        minReading = 250.0 # again, a guess
+        # Range - Used in calculating percent
+        range = maxReading - minReading
+        # Sensor Length - Will need to be measured in CM from the bottom of the
+        # sensor to the calibrated pure water gravity reading.
+        length = 32 # just a place holder
+        # Percent Full - Must be calculated to find reading in CM
+        percentFull = (maxReading - curReading)/range
+        # Reading in CM - too bad the readings on a hydrometer don't directly
+        # translate to CM. The scale seems to be some sort of exponential function.
+        cmReading = length * percentFull 
+        return cmReading
