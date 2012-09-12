@@ -76,6 +76,8 @@ class sensors:
         maxReding = 1000.0 # just taking a guess
         # Minimum Reading - Will need to be a calibrated setting in the future
         minReading = 250.0 # again, a guess
+        # Hydrometer Calibration temperature
+        hydCalTemp = 60
         # Range - Used in calculating percent
         range = maxReading - minReading
         # Sensor Length - We will need to find the length in Brix.
@@ -85,11 +87,11 @@ class sensors:
         # Reading in Brix.
         brixReading = length * perFromTop
         # Reading in SG.
-        sgReading = 1.000898 + 0.003859118*brixReading + 0.00001370735*brixReading**2 + 0.00000003742517*brixReading**3
+        sgReading = 1 / (1 - (brixReading / 261.3))
         # Get temp for temp correction
         curCTemp = self.readTemp()
         curFTemp = self.tempFahrenheit(curCTemp)
         # Temperature corrected SG
-        correction = 1.313454 - 0.132674*curFTemp + 0.002057793*curFTemp**2 - 0.000002627634*curFTemp**3
-        sgCorrected = sgReading + (correction * 0.001)
+        correction = sgReading * (1.00130346 - (0.000134722124 * curFTemp) + (0.00000204052596 * curFTemp**2) - (0.00000000232820948 * curFTemp**3)) / (1.00130346 - (0.000134722124 * hydCalTemp) + (0.00000204052596 * hydCalTemp**2) - (0.00000000232820948 * hydCalTemp**3)) - sgReading
+        sgCorrected = sgReading + correction
         return sgCorrected
