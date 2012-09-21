@@ -4,7 +4,7 @@
 
         setInterval(function() {
             printReading();
-        }, 1000);
+        }, 300);
     });
 
     function printReading() {
