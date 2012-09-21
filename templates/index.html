@@ -1,46 +1,28 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>RaspBEERyPi</title>
+{% extends "main.html" %}
 
-    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/beer.css" rel="stylesheet">
+{% block title %} Latest Readings {% endblock %}
 
-    <script src="{{ STATIC_URL }}js/jquery-1.8.1.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-    <script src="{{ STATIC_URL }}js/beer.js"></script>
-
-  </head>
-  <body>
-    <div class="container" id="main">
-        <div class="navbar navbar-inverse">
-            <div class="navbar-inner">
-                <a class="brand" name="title">RaspBEERyPi - Latest Readings</a>
-            </div>
+{% block content %}
+<div class="latest-readings">
+    <div class="settings">
+        <form>
+            <select type="select" class="temp-type">
+                <option value='f'>Fahrenheit</option> 
+                <option value='c'>Celcius</option> 
+            </select>
+        </form>
+    </div>
+    <div class="row">
+        <div class="span6">
+            <h1>Temperature</h1>
         </div>
-        <div class="latest-readings">
-            <div class="settings">
-                <form>
-                    <select type="select" class="temp-type">
-                        <option value='f'>Fahrenheit</option> 
-                        <option value='c'>Celcius</option> 
-                    </select>
-                </form>
-            </div>
-            <div class="row">
-                <div class="span6">
-                    <h1>Temperature</h1>
-                </div>
-                <div class="span6">
-                    <h1>Gravity</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="span6 temp"></div>
-                <div class="span6 gravity"></div>
-            </div>
+        <div class="span6">
+            <h1>Gravity</h1>
         </div>
     </div>
-    
-  </body>
-</html>
+    <div class="row">
+        <div class="span6 temp"></div>
+        <div class="span6 gravity"></div>
+    </div>
+</div>
+{% endblock %}
