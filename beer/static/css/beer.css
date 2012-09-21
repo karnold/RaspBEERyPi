@@ -1,4 +1,8 @@
+#main {
+    margin-top: 30px;
+}
+
 .latest-readings {
-    margin-top: 50px;
     font-size: 100px;
+    line-height: 110px;
 }

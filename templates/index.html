@@ -12,11 +12,35 @@
 
   </head>
   <body>
-    <div class="container">
-        <div class="hero-unit">
-            <h1>Latest Readings</h1>
-            <div class="latest-readings">Loading...</div>
+    <div class="container" id="main">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <a class="brand" name="title">RaspBEERyPi - Latest Readings</a>
+            </div>
+        </div>
+        <div class="latest-readings">
+            <div class="settings">
+                <form>
+                    <select type="select" class="temp-type">
+                        <option value='f'>Fahrenheit</option> 
+                        <option value='c'>Celcius</option> 
+                    </select>
+                </form>
+            </div>
+            <div class="row">
+                <div class="span6">
+                    <h1>Temperature</h1>
+                </div>
+                <div class="span6">
+                    <h1>Gravity</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span6 temp"></div>
+                <div class="span6 gravity"></div>
+            </div>
         </div>
     </div>
+    
   </body>
 </html>

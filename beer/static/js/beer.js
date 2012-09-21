@@ -12,7 +12,14 @@
             url: 'current-reading',
             dataType: 'json',
             success: function(data) {
-                $('.latest-readings').html('Currently ' + data.f + ' F');
+                var temp = $('select.temp-type').val();
+                if (temp == 'f') {
+                    tempReading = data.f + ' F';
+                } else {
+                    tempReading = data.c + ' C';
+                }
+                $('.latest-readings .temp').html(tempReading);
+                $('.latest-readings .gravity').html(data.gravity);
             }   
         }); 
     }
